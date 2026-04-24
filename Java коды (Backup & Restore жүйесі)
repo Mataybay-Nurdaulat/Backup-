@@ -1,0 +1,38 @@
+import java.io.*;
+import java.nio.file.*;
+
+public class BackupSystem {
+
+    // Backup жасау
+    public static void backup(String sourcePath, String backupPath) {
+        try {
+            Files.copy(Paths.get(sourcePath), Paths.get(backupPath), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Backup сәтті жасалды!");
+        } catch (IOException e) {
+            System.out.println("Backup жасау кезінде қате: " + e.getMessage());
+        }
+    }
+
+    // Restore жасау
+    public static void restore(String backupPath, String restorePath) {
+        try {
+            Files.copy(Paths.get(backupPath), Paths.get(restorePath), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Restore сәтті жасалды!");
+        } catch (IOException e) {
+            System.out.println("Restore кезінде қате: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
+        String originalFile = "data.txt";
+        String backupFile = "backup_data.txt";
+        String restoredFile = "restored_data.txt";
+
+        // Backup жасау
+        backup(originalFile, backupFile);
+
+        // Restore жасау
+        restore(backupFile, restoredFile);
+    }
+}
